@@ -15,10 +15,10 @@ class User(UserMixin, db.Model):
     password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
 
     posts: so.WriteOnlyMapped['Post'] = so.relationship(
-        back_populates='author')
+        back_populates='author', passive_deletes=True)
 
     def __repr__(self):
-        return 'User {}>'.format(self.username)
+        return '<User {}>'.format(self.username)
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
     def check_password(self, password):
@@ -33,7 +33,7 @@ class Post(db.Model):
     author: so.Mapped[User] = so.relationship(back_populates='posts')
 
     def __repr__(self):
-        return 'Post {}>'.format(self.body)
+        return '<Post {}>'.format(self.body)
     
 @login.user_loader
 def load_user(id):
