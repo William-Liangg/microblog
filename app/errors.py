@@ -1,0 +1,1 @@
+# Error handlers will be registered in __init__.py to avoid circular imports
