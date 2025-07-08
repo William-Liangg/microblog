@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -20,6 +20,7 @@ login = LoginManager(app)
 login.login_view = 'login'
 
 from app import routes, models, errors
+from app import translate
 
 # Error handlers
 @app.errorhandler(404)
