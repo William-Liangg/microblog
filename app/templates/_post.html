@@ -14,13 +14,8 @@
       <span id ="post{{ post.id }}">{{ post.body }}</span>
       {% if post.language and post.language != g.locale %}
       <br><br>
-      <span id="translation{{ post.id }}"> <!--- adding id to translation link --->
-        <a href="javascript:translate(
-          'post{{ post.id }}',
-          'translation{{ post.id }}',
-          '{{ post.language }}',
-          '{{ g.locale }}');">{{ _('Translate') }}</a>
-      </span>
+      <a href="#" class="translate-link" data-post-id="{{ post.id }}" data-source-language="{{ post.language }}" data-dest-language="{{ g.locale }}">{{ _('Translate') }}</a>
+      <div id="translation_container{{ post.id }}" style="display:none; margin-top:0.5em;"></div>
       {% endif %}
     </div>
   </div>

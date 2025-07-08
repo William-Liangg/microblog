@@ -9,6 +9,11 @@ from datetime import datetime, timezone
 import sqlalchemy as sa
 from langdetect import detect, LangDetectException
 from app.translate import translate
+from flask_babel import _
+
+@app.context_processor
+def inject_babel_underscore():
+    return dict(_=_)
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -20,7 +25,7 @@ def index():
             language = detect(form.post.data)
         except LangDetectException:
             language = ''
-        post = Post(body=form.post.data, author=current_user)
+        post = Post(body=form.post.data, author=current_user, language=language)
         db.session.add(post)
         db.session.commit()
         flash('Your post is now live!')
@@ -195,6 +200,8 @@ def reset_password(token):
         flash('Your password has been reset')
         return redirect(url_for('login'))
     return render_template(reset_password.html, form=form)
+
+# translation function
 
 @app.route('/translate', methods=['POST'])
 @login_required
