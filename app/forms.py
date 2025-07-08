@@ -55,7 +55,7 @@ class EmptyForm(FlaskForm):
 # blog submission form
 
 class PostForm(FlaskForm):
-    post = TextAreaField('Say something:', validators=[DataRequired(), Length(min=1, max=140)])
+    post = TextAreaField('Say something', validators=[DataRequired(), Length(min=1, max=140)])
     submit = SubmitField('Submit')
 
 # reset password request form

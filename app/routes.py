@@ -90,9 +90,12 @@ def user(username):
         if posts.has_next else None
     prev_url = url_for('user', username=user.username, page=posts.prev_num) \
         if posts.has_prev else None
-    # to render the follow button
-    form = EmptyForm()
-    return render_template('user.html', user=user, posts=posts, form=form)
+    # Pass PostForm if viewing own profile, else EmptyForm
+    if user == current_user:
+        form = PostForm()
+    else:
+        form = EmptyForm()
+    return render_template('user.html', user=user, posts=posts, form=form, next_url=next_url, prev_url=prev_url)
 
 @app.before_request
 def before_request():

@@ -11,12 +11,12 @@
             {{ form.hidden_tag() }}
             <div class="mb-3">
               {{ form.post.label(class="form-label fw-bold") }}
-              {{ form.post(class="form-control rounded-pill px-3 py-2", rows=2, placeholder="What's on your mind?") }}
+              {{ form.post(class="form-control", style="border-radius:8px;", rows=2, placeholder="What's on your mind?") }}
               {% for error in form.post.errors %}
                 <div class="text-danger small mt-1">{{ error }}</div>
               {% endfor %}
             </div>
-            <button type="submit" class="btn btn-gradient-blue btn-lg rounded-pill px-4 py-2 shadow-sm">{{ form.submit.label.text }}</button>
+            <button type="submit" class="btn-custom-submit">{{ form.submit.label.text }}</button>
           </form>
         </div>
       </div>
