@@ -1,11 +1,28 @@
-<table>
-    <tr valign="top">
-        <td><img src="{{ post.author.avatar(36) }}"></td>
-        <td>
-            <a href="{{ url_for('user', username=post.author.username) }}"> <!---- show link to author in blog posts ---->
-                {{ post.author.username }}
-            </a>
-            says:<br>{{ post.body }}
-        </td>
-    </tr>
-</table>
+<div class="card mb-3">
+  <div class="card-body d-flex">
+    <a href="{{ url_for('user', username=post.author.username) }}">
+      <img src="{{ post.author.avatar(64) }}" class="rounded-circle me-3" width="64" height="64" />
+    </a>
+    <div>
+      <div>
+        <a href="{{ url_for('user', username=post.author.username) }}" class="fw-bold user-link">
+          {{ post.author.username }}
+        </a>
+        <span class="text-muted small ms-2">{{ post.timestamp.strftime('%Y-%m-%d %H:%M') if post.timestamp else '' }}</span>
+      </div>
+      <div class="mt-2">{{ post.body }}</div>
+    </div>
+  </div>
+</div>
+
+<style>
+.user-link {
+  color: #6fb3ff;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.user-link:hover, .user-link:focus {
+  color: #4f8cff;
+  text-decoration: none;
+}
+</style>

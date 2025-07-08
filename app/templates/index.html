@@ -1,29 +1,59 @@
 {% extends "base.html" %}
 
-<!---- post submission form-->
-
 {% block content %}
-    <h1>Welcome, {{ current_user.username }}!</h1>
-    {% if form %} <!-- making post optional -->
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.post.label }}<br>
-            {{ form.post(cols=32, rows=4) }}<br>
-            {% for error in form.post.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
-    {% endif %}
-    {% for post in posts %}
-        {% include '_post.html' %}
-    {% endfor %}
-    {% if prev_url %} <!---- render pagination links -->
-    <a href="{{ prev_url }}">Newer posts</a>
-    {% endif %}
-    {% if next_url %}
-    <a href="{{ next_url }}">Older posts</a>
-    {% endif %}
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1 class="mb-4">Hi, {{ current_user.username }}!</h1>
+      {% if form %}
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+              {{ form.post.label(class="form-label fw-bold") }}
+              {{ form.post(class="form-control rounded-pill px-3 py-2", rows=2, placeholder="What's on your mind?") }}
+              {% for error in form.post.errors %}
+                <div class="text-danger small mt-1">{{ error }}</div>
+              {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-gradient-blue btn-lg rounded-pill px-4 py-2 shadow-sm">{{ form.submit.label.text }}</button>
+          </form>
+        </div>
+      </div>
+      {% endif %}
+      <div class="mb-4">
+        {% for post in posts %}
+          {% include '_post.html' %}
+        {% endfor %}
+      </div>
+      <nav aria-label="Post navigation">
+        <ul class="pagination justify-content-center mt-4">
+          <li class="page-item{% if not prev_url %} disabled{% endif %}">
+            <a class="page-link" href="{{ prev_url if prev_url else '#' }}" tabindex="-1">
+              <span aria-hidden="true">&larr;</span> Newer posts
+            </a>
+          </li>
+          <li class="page-item{% if not next_url %} disabled{% endif %}">
+            <a class="page-link" href="{{ next_url if next_url else '#' }}">
+              Older posts <span aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
 {% endblock %}
+
+<style>
+.btn-gradient-blue {
+  background: linear-gradient(90deg, #4f8cff 0%, #6fb3ff 100%);
+  color: #fff;
+  border: none;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+.btn-gradient-blue:hover, .btn-gradient-blue:focus {
+  background: linear-gradient(90deg, #6fb3ff 0%, #4f8cff 100%);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(79,140,255,0.15);
+}
+</style>
