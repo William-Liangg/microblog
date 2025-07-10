@@ -20,7 +20,7 @@
           {% endif %}
           {% if user == current_user %}
             <a href="{{ url_for('edit_profile') }}" class="btn btn-secondary btn-sm mt-2">Edit Profile</a>
-          {% elif user != current_user %}
+          {% elif user != current_user and form %}
             <form action="{{ url_for('follow' if not current_user.is_following(user) else 'unfollow', username=user.username) }}" method="post">
               {{ form.hidden_tag() }}
               <button type="submit" class="btn btn-outline-primary btn-sm">

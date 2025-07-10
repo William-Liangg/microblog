@@ -95,14 +95,15 @@ class User(UserMixin, db.Model):
     #jwt token to reset password
 
     def get_reset_password_token(self, expires_in=600):
-        return jwt.encode({'reset_password': self.id, 'exp': time() + expires_in}, app.config['SECRET_KEY'], algorithm='H2256')
+        return jwt.encode({'reset_password': self.id, 'exp': time() + expires_in}, app.config['SECRET_KEY'], algorithm='HS256')
     
     @staticmethod
     def verify_reset_password_token(token):
-        try: id = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['H2256']['reset_password'])
+        try: 
+            id = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])['reset_password']
         except:
-            return
-        return db.session.get(User,id)
+            return None
+        return db.session.get(User, id)
     
 class Post(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)

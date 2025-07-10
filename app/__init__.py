@@ -9,8 +9,6 @@ import os
 from flask_mail import Mail
 from flask_moment import Moment
 from flask_babel import Babel
-
-
 app = Flask(__name__)
 babel = Babel(app)
 moment = Moment(app)
@@ -21,7 +19,7 @@ mail = Mail(app) #flask-mail instance
 login = LoginManager(app)
 login.login_view = 'login'
 
-from app import routes, models, errors
+from app import routes, models
 from app import translate
 # print("MS_TRANSLATOR_KEY:", app.config.get("MS_TRANSLATOR_KEY"))  # Removed debug print
 # Error handlers

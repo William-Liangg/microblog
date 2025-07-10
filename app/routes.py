@@ -48,8 +48,7 @@ def explore():
         if posts.has_next else None
     prev_url = url_for('explore', page=posts.prev_num) \
         if posts.has_prev else None
-    return render_template('index.html', title='Explore', posts=posts)
-
+    return render_template('index.html', title='Explore', posts=posts.items, next_url=next_url, prev_url=prev_url, form=None)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -105,7 +104,7 @@ def user(username):
         form = PostForm()
     else:
         form = EmptyForm()
-    return render_template('user.html', user=user, posts=posts, form=form, next_url=next_url, prev_url=prev_url)
+    return render_template('user.html', user=user, posts=posts.items, form=form, next_url=next_url, prev_url=prev_url)
 
 @app.before_request
 def before_request():
@@ -199,7 +198,7 @@ def reset_password(token):
         db.session.commit()
         flash('Your password has been reset')
         return redirect(url_for('login'))
-    return render_template(reset_password.html, form=form)
+    return render_template('reset_password.html', form=form)
 
 # translation function
 
