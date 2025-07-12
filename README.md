@@ -151,16 +151,6 @@ MAIL_USERNAME=your-email@gmail.com
 MAIL_PASSWORD=your-app-password
 ```
 
-## 📸 Screenshots
-
-*[Screenshots will be added here showing the main features, user interface, and key functionality]*
-
-- **Homepage**: Main feed with posts and navigation
-- **User Profile**: Individual user pages with post history
-- **Authentication**: Login and registration forms
-- **Post Creation**: Rich text editor for creating posts
-- **Mobile View**: Responsive design on mobile devices
-
 ## 🏗️ Project Structure
 
 ```
@@ -204,9 +194,9 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 📞 Contact
 
-- **GitHub**: [@yourusername](https://github.com/yourusername)
-- **LinkedIn**: [Your Name](https://linkedin.com/in/yourprofile)
-- **Portfolio**: [your-portfolio.com](https://your-portfolio.com)
+- **GitHub**: [@William-Liangg](https://github.com/William-Liangg)
+- **LinkedIn**: [William Liang](https://linkedin.com/in/william-liang-5007552a9/)
+- **Portfolio**: https://william-liangg.github.io/portfolio/
 
 ---
 
