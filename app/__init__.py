@@ -9,6 +9,7 @@ import os
 from flask_mail import Mail
 from flask_moment import Moment
 from flask_babel import Babel
+
 app = Flask(__name__)
 babel = Babel(app)
 moment = Moment(app)
@@ -17,11 +18,16 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 mail = Mail(app) #flask-mail instance
 login = LoginManager(app)
-login.login_view = 'login'
+login.login_view = 'auth.login'
+
+
+
+from app.auth import bp as auth_bp
+app.register_blueprint(auth_bp, url_prefix='/auth')
 
 from app import routes, models
 from app import translate
-# print("MS_TRANSLATOR_KEY:", app.config.get("MS_TRANSLATOR_KEY"))  # Removed debug print
+
 # Error handlers
 @app.errorhandler(404)
 def not_found_error(error):
@@ -56,4 +62,3 @@ if not app.debug:
 
     app.logger.setLevel(logging.INFO)
     app.logger.info('Microblog startup')
-
